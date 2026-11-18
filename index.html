@@ -53,8 +53,6 @@
     <input id="codigo" type="text" autocomplete="off" autocapitalize="characters" required>
     <label for="closer">Tu nombre</label>
     <input id="closer" type="text" autocomplete="name" required>
-    <label for="correo">Tu correo <small>(opcional, para que te llegue el enlace)</small></label>
-    <input id="correo" type="email" autocomplete="email">
 
     <label for="prospecto">Nombre de la persona</label>
     <input id="prospecto" type="text" autocomplete="off" required>
@@ -87,15 +85,14 @@
     </div>
     <div class="aviso" id="aviso" hidden></div>
     <a class="boton" id="abrir" target="_blank" rel="noopener">Ver la revisión</a>
-    <a class="boton sec" id="wa" target="_blank" rel="noopener">Mandar por WhatsApp</a>
-    <button class="boton sec" id="copiar" type="button">Copiar enlace</button>
+    <button class="boton sec" id="copiarMensaje" type="button">Copiar mensaje para ManyChat</button>
     <button class="boton sec" id="otra" type="button">Hacer otra revisión</button>
   </section>
 </main>
 
 <script>
   var $ = function (id) { return document.getElementById(id); };
-  var capturas = [], cargando = false, enlace = '';
+  var capturas = [], cargando = false, mensaje = '';
 
   function achicar(archivo) {
     return new Promise(function (ok, mal) {
@@ -170,7 +167,7 @@
     mostrado = true; clearInterval(sondeo);
     if (!r.ok) { solicitud = ''; guardar('solicitud', ''); vista('f'); return error(r.error || 'Algo falló. Inténtalo de nuevo.'); }
     guardar('solicitud', '');
-    enlace = r.pdf;
+    mensaje = r.whatsapp;
     $('n').textContent = r.nota; $('s').textContent = '/' + r.sobre;
     $('quien').textContent = r.prospecto + (r.completa ? ' · versión completa' : '') + ' · lista en ' + r.segundos + ' s';
     var notas = [];
@@ -178,8 +175,7 @@
     if (r.avisos && r.avisos.length) notas.push('Léela antes de enviarla. ' + r.avisos.join(' '));
     $('aviso').textContent = notas.join(' '); $('aviso').hidden = !notas.length;
     $('abrir').href = r.pdf;
-    $('wa').href = 'https://wa.me/?text=' + encodeURIComponent(r.whatsapp);
-    $('copiar').textContent = 'Copiar enlace';
+    $('copiarMensaje').textContent = 'Copiar mensaje para ManyChat';
     vista('listo');
   }
 
@@ -206,7 +202,7 @@
     solicitud = solicitud || idNuevo(); guardar('solicitud', solicitud);
     esperar();
     pedir(API, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({accion: 'recibir', datos: {
-        solicitud: solicitud, codigo: v('codigo'), closer: v('closer'), correo: v('correo'), prospecto: v('prospecto'),
+        solicitud: solicitud, codigo: v('codigo'), closer: v('closer'), correo: '', prospecto: v('prospecto'),
         instagram: v('instagram'), dedica: v('dedica'), capturas: capturas.map(function (u) { return u.split(',')[1]; })
       }})}).then(function (r) { if (r && !r.enCurso) mostrar(r); }).catch(function () {});
   });
@@ -215,10 +211,10 @@
   solicitud = leer('solicitud');
   if (solicitud) esperar();
 
-  $('copiar').addEventListener('click', function () {
+  $('copiarMensaje').addEventListener('click', function () {
     var b = this;
-    navigator.clipboard.writeText(enlace).then(function () { b.textContent = 'Enlace copiado'; },
-      function () { window.prompt('Copia el enlace:', enlace); });
+    navigator.clipboard.writeText(mensaje).then(function () { b.textContent = 'Mensaje copiado. Pégalo en ManyChat'; },
+      function () { window.prompt('Copia el mensaje:', mensaje); });
   });
 
   $('otra').addEventListener('click', function () {
