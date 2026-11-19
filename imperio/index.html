@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+<title>Revisión de perfil · Imperio Viral</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@700;800;900&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--fondo:#0a0907;--crema:#f5efe3;--naranja:#e2bf6e;--fuego:#c9a15a;--oro:#f2de9f;--tarjeta:#15120d;--borde:#3a3222;--suave:#cfc6b4}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fondo);color:var(--crema);font:400 16px/1.45 Figtree,Arial,sans-serif}
+  main{max-width:560px;margin:0 auto;padding:28px 16px 48px}
+  .marca{font:700 26px/1.05 Cinzel,Georgia,serif;letter-spacing:.06em}
+  .marca b{display:block;font-weight:700;background:linear-gradient(92deg,#b98b3e,#c9a15a 34%,#e2bf6e 58%,#f2de9f 82%,#fbf6ea);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .coral{display:block;font:800 11px/1 Montserrat,Arial,sans-serif;letter-spacing:.3em;color:var(--oro);margin-bottom:10px}
+  h1{font:800 20px/1.2 Montserrat,Arial,sans-serif;margin:22px 0 6px}
+  p.sub{margin:0 0 20px;color:var(--suave)}
+  label{display:block;font-weight:600;margin:16px 0 6px}
+  label small{font-weight:400;color:var(--suave)}
+  input[type=text],input[type=email],textarea{width:100%;padding:12px 14px;font:inherit;color:var(--crema);background:var(--tarjeta);border:1px solid var(--borde);border-radius:10px}
+  input:focus,textarea:focus{outline:2px solid var(--naranja);border-color:transparent}
+  textarea{min-height:84px;resize:vertical}
+  .subir{display:block;padding:18px 14px;text-align:center;background:var(--tarjeta);border:1.5px dashed var(--naranja);border-radius:10px;cursor:pointer;font-weight:600}
+  .subir input{position:absolute;opacity:0;width:1px;height:1px}
+  .ayuda{font-size:14px;color:var(--suave);margin:8px 0 0}
+  .miniaturas{display:flex;gap:10px;margin-top:10px}
+  .miniaturas button{position:relative;width:30%;margin:0;padding:0;background:none;border:0;border-radius:8px;overflow:hidden}
+  .miniaturas img{display:block;width:100%;height:170px;object-fit:cover;object-position:top;border:1px solid var(--borde);border-radius:8px}
+  .miniaturas span{position:absolute;top:6px;right:6px;width:24px;height:24px;line-height:24px;border-radius:50%;background:#0a0907;color:#f5efe3;font:800 14px Arial}
+  .aviso{margin-top:14px;padding:12px 14px;text-align:left;font-size:14px;background:#2a1a08;border:1px solid var(--oro);border-radius:10px}
+  button,.boton{display:block;width:100%;margin-top:22px;padding:15px;font:800 15px Montserrat,Arial,sans-serif;text-align:center;text-decoration:none;color:#0a0907;background:linear-gradient(92deg,#c9a15a,#e2bf6e 55%,#f2de9f);border:0;border-radius:10px;cursor:pointer}
+  .boton.sec{margin-top:10px;color:var(--crema);background:var(--tarjeta);border:1px solid var(--borde)}
+  .error{margin-top:16px;padding:12px 14px;background:#2a0f0a;border:1px solid #b98b3e;border-radius:10px}
+  .tarjeta{margin-top:22px;padding:22px 18px;background:var(--tarjeta);border:1px solid var(--borde);border-radius:14px;text-align:center}
+  .nota{font:900 46px/1 Montserrat,Arial,sans-serif;color:var(--naranja);margin:8px 0}
+  .nota small{font-size:20px;color:var(--crema)}
+  .giro{width:38px;height:38px;margin:4px auto 14px;border-radius:50%;border:4px solid var(--borde);border-top-color:var(--naranja);animation:g 1s linear infinite}
+  @keyframes g{to{transform:rotate(360deg)}}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="marca"><span class="coral">MENTORÍA IMPERIO DIGITAL</span>IMPERIO <b>VIRAL</b></div>
+
+  <form id="f" novalidate>
+    <h1>Revisión de perfil de Instagram</h1>
+    <p class="sub">Llena los datos de la persona y en alrededor de un minuto tienes su PDF listo para enviar.</p>
+
+    <label for="codigo">Código del equipo</label>
+    <input id="codigo" type="text" autocomplete="off" autocapitalize="characters" required>
+    <label for="closer">Tu nombre</label>
+    <input id="closer" type="text" autocomplete="name" required>
+
+    <label for="prospecto">Nombre de la persona</label>
+    <input id="prospecto" type="text" autocomplete="off" required>
+    <label for="instagram">@ de Instagram</label>
+    <input id="instagram" type="text" autocomplete="off" autocapitalize="none" placeholder="@usuario" required>
+    <label for="dedica">¿A qué se dedica o qué vende?</label>
+    <textarea id="dedica" required></textarea>
+
+    <label>Capturas del perfil <small>(de 1 a 3)</small></label>
+    <label class="subir" for="fotos" style="margin:0"><span id="txtFotos">Elegir capturas</span>
+      <input id="fotos" type="file" accept="image/*" multiple></label>
+    <p class="ayuda">Que se vean la foto, el nombre, la bio, las destacadas y el muro con las publicaciones fijadas. Si no cabe todo en una, agrega otra. Toca una miniatura para quitarla.</p>
+    <div class="miniaturas" id="minis"></div>
+
+    <div class="error" id="err" hidden></div>
+    <button type="submit">Crear revisión</button>
+  </form>
+
+  <section id="espera" class="tarjeta" hidden>
+    <div class="giro"></div>
+    <b>Creando la revisión…</b>
+    <p class="ayuda">Tarda alrededor de un minuto. No cierres esta página. <span id="reloj"></span></p>
+  </section>
+
+  <section id="listo" hidden>
+    <div class="tarjeta">
+      <b>Revisión lista</b>
+      <div class="nota"><span id="n"></span><small id="s"></small></div>
+      <p class="ayuda" id="quien"></p>
+    </div>
+    <div class="aviso" id="aviso" hidden></div>
+    <a class="boton" id="abrir" target="_blank" rel="noopener">Ver la revisión</a>
+    <button class="boton sec" id="copiarMensaje" type="button">Copiar mensaje</button>
+    <button class="boton sec" id="otra" type="button">Hacer otra revisión</button>
+  </section>
+</main>
+
+<script>
+  var $ = function (id) { return document.getElementById(id); };
+  var capturas = [], cargando = false, mensaje = '';
+
+  function achicar(archivo) {
+    return new Promise(function (ok, mal) {
+      var url = URL.createObjectURL(archivo), im = new Image();
+      im.onload = function () {
+        var k = Math.min(1, 1500 / Math.max(im.width, im.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        var x = c.getContext('2d');
+        x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+        x.drawImage(im, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        ok(c.toDataURL('image/jpeg', 0.85));
+      };
+      im.onerror = function () { mal(new Error('imagen')); };
+      im.src = url;
+    });
+  }
+
+  function error(t) { $('err').textContent = t; $('err').hidden = !t; }
+
+  function pintar() {
+    $('minis').innerHTML = '';
+    capturas.forEach(function (u, n) {
+      var b = document.createElement('button'), i = new Image(), x = document.createElement('span');
+      b.type = 'button'; b.setAttribute('aria-label', 'Quitar captura ' + (n + 1)); i.src = u; i.alt = ''; x.textContent = '×';
+      b.appendChild(i); b.appendChild(x);
+      b.addEventListener('click', function () { capturas.splice(n, 1); pintar(); });
+      $('minis').appendChild(b);
+    });
+    $('txtFotos').textContent = !capturas.length ? 'Elegir capturas' : capturas.length === 3 ? 'Ya tienes 3 capturas' : capturas.length + ' de 3 · agregar otra';
+  }
+
+  $('fotos').addEventListener('change', function (e) {
+    var todas = [].slice.call(e.target.files), lista = todas.slice(0, 3 - capturas.length);
+    e.target.value = ''; error(todas.length > lista.length ? 'Solo se pueden subir 3 capturas.' : '');
+    if (!lista.length) return;
+    cargando = true; $('txtFotos').textContent = 'Preparando…';
+    Promise.all(lista.map(achicar)).then(function (r) { capturas = capturas.concat(r); })
+      .catch(function () { error('No se pudo leer una de las imágenes. Prueba con otra captura.'); })
+      .then(function () { cargando = false; pintar(); });
+  });
+
+  var crono;
+  function vista(cual) {
+    $('f').hidden = cual !== 'f'; $('espera').hidden = cual !== 'espera'; $('listo').hidden = cual !== 'listo';
+    window.scrollTo(0, 0); clearInterval(crono);
+    if (cual === 'espera') {
+      var t = 0; $('reloj').textContent = '';
+      crono = setInterval(function () { t++; $('reloj').textContent = t + ' s'; }, 1000);
+    }
+  }
+
+  function guardar(k, v) { try { if (v) sessionStorage.setItem(k, v); else sessionStorage.removeItem(k); } catch (e) {} }
+  function leer(k) { try { return sessionStorage.getItem(k) || ''; } catch (e) { return ''; } }
+  function idNuevo() {
+    var a = new Uint8Array(16); crypto.getRandomValues(a);
+    return [].map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+  }
+
+  var API = 'https://script.google.com/macros/s/AKfycbxaWMX0BwMvOyyH9bueQjPfb6Vry_m54t5KndfKT-me0c7FA4GDGdvlrTX_jP72r59q/exec';
+  // Sin cookies: así no importa cuántas cuentas de Google tenga abiertas el navegador.
+  function pedir(url, op) {
+    op = op || {}; op.credentials = 'omit'; op.redirect = 'follow'; op.cache = 'no-store'; op.referrerPolicy = 'no-referrer';
+    return fetch(url, op).then(function (r) { return r.json(); });
+  }
+
+  var solicitud = '', sondeo, vueltas = 0, mostrado = false;
+
+  function mostrar(r) {
+    if (mostrado) return;
+    mostrado = true; clearInterval(sondeo);
+    if (!r.ok) { solicitud = ''; guardar('solicitud', ''); vista('f'); return error(r.error || 'Algo falló. Inténtalo de nuevo.'); }
+    guardar('solicitud', '');
+    mensaje = r.whatsapp;
+    $('n').textContent = r.nota; $('s').textContent = '/' + r.sobre;
+    $('quien').textContent = r.prospecto + (r.completa ? ' · versión completa' : '') + ' · lista en ' + r.segundos + ' s';
+    var notas = [];
+    if (r.faltan && r.faltan.length) notas.push('Capas que no se vieron en las capturas: ' + r.faltan.join(', ') + '.');
+    if (r.avisos && r.avisos.length) notas.push('Léela antes de enviarla. ' + r.avisos.join(' '));
+    $('aviso').textContent = notas.join(' '); $('aviso').hidden = !notas.length;
+    $('abrir').href = r.pdf;
+    $('copiarMensaje').textContent = 'Copiar mensaje';
+    vista('listo');
+  }
+
+  // Si el teléfono corta la conexión, el resultado se recupera preguntando con el número de solicitud.
+  function esperar() {
+    mostrado = false; vueltas = 0; vista('espera'); clearInterval(sondeo);
+    sondeo = setInterval(function () {
+      if (++vueltas > 48) {
+        clearInterval(sondeo); mostrado = true; vista('f');
+        return error('Está tardando más de lo normal. Pulsa «Crear revisión» otra vez: no se creará una segunda.');
+      }
+      pedir(API + '?accion=consultar&id=' + encodeURIComponent(solicitud))
+        .then(function (r) { if (r) mostrar(r); }).catch(function () {});
+    }, 5000);
+  }
+
+  $('f').addEventListener('submit', function (e) {
+    e.preventDefault(); error('');
+    var v = function (id) { return $(id).value.trim(); };
+    if (cargando) return error('Espera a que terminen de cargar las capturas.');
+    if (!v('codigo') || !v('closer') || !v('prospecto') || !v('instagram') || !v('dedica')) return error('Llena el código, tu nombre, el del prospecto, su @ y a qué se dedica.');
+    if (!capturas.length) return error('Sube al menos una captura del perfil.');
+    try { localStorage.setItem('codigo', v('codigo')); } catch (err) {}
+    solicitud = solicitud || idNuevo(); guardar('solicitud', solicitud);
+    esperar();
+    pedir(API, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({accion: 'recibir', datos: {
+        solicitud: solicitud, codigo: v('codigo'), closer: v('closer'), correo: '', prospecto: v('prospecto'),
+        instagram: v('instagram'), dedica: v('dedica'), capturas: capturas.map(function (u) { return u.split(',')[1]; })
+      }})}).then(function (r) { if (r && !r.enCurso) mostrar(r); }).catch(function () {});
+  });
+
+  try { $('codigo').value = localStorage.getItem('codigo') || ''; } catch (e) {}
+  solicitud = leer('solicitud');
+  if (solicitud) esperar();
+
+  $('copiarMensaje').addEventListener('click', function () {
+    var b = this;
+    navigator.clipboard.writeText(mensaje).then(function () { b.textContent = 'Mensaje copiado'; },
+      function () { window.prompt('Copia el mensaje:', mensaje); });
+  });
+
+  $('otra').addEventListener('click', function () {
+    ['prospecto', 'instagram', 'dedica'].forEach(function (id) { $(id).value = ''; });
+    capturas = []; solicitud = ''; $('fotos').value = ''; pintar(); $('aviso').hidden = true;
+    vista('f');
+  });
+</script>
+</body>
+</html>

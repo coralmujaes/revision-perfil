@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<title>Tu revisión de perfil · Imperio Viral</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@800;900&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:#0a0907;color:#f5efe3;font:400 17px/1.45 Figtree,Arial,sans-serif}
+  main{max-width:520px;margin:0 auto;padding:40px 16px}
+  .marca{font:700 28px/1.05 Cinzel,Georgia,serif;letter-spacing:.06em}
+  .marca b{display:block;font-weight:700;background:linear-gradient(92deg,#b98b3e,#c9a15a 34%,#e2bf6e 58%,#f2de9f 82%,#fbf6ea);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .coral{display:block;font:800 12px/1 Montserrat,Arial,sans-serif;letter-spacing:.3em;color:#f2de9f;margin-bottom:10px}
+  h1{font:800 24px/1.2 Montserrat,Arial,sans-serif;margin:36px 0 10px}
+  p{color:#cfc6b4;margin:0 0 24px}
+  button{display:block;width:100%;padding:16px;font:800 16px Montserrat,Arial,sans-serif;color:#0a0907;background:linear-gradient(92deg,#c9a15a,#e2bf6e 55%,#f2de9f);border:0;border-radius:10px;cursor:pointer}
+  button:disabled{opacity:.6;cursor:wait}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="marca"><span class="coral">MENTORÍA IMPERIO DIGITAL</span>IMPERIO <b>VIRAL</b></div>
+  <div id="si" hidden>
+    <h1>Tu revisión de perfil está lista</h1>
+    <p>Descárgala y ábrela en tu teléfono o tu computadora.</p>
+    <button id="b" type="button" disabled>Preparando tu revisión…</button>
+  </div>
+  <div id="carga">
+    <h1>Preparando tu revisión…</h1>
+    <p>Esto toma unos segundos.</p>
+  </div>
+  <div id="no" hidden>
+    <h1>No encontramos esta revisión</h1>
+    <p>Este enlace no es válido o ya venció. Escríbele a quien te lo envió.</p>
+  </div>
+  <script>
+    (function () {
+      var API = 'https://script.google.com/macros/s/AKfycbxaWMX0BwMvOyyH9bueQjPfb6Vry_m54t5KndfKT-me0c7FA4GDGdvlrTX_jP72r59q/exec', $ = function (i) { return document.getElementById(i); };
+      var r = new URLSearchParams(location.search).get('r') || '';
+      function falla() { $('carga').hidden = true; $('si').hidden = true; $('no').hidden = false; }
+      if (!/^[\w-]{20,}$/.test(r)) return falla();
+      fetch(API + '?accion=pdf&r=' + encodeURIComponent(r), {credentials: 'omit', redirect: 'follow', cache: 'no-store', referrerPolicy: 'no-referrer'})
+        .then(function (x) { return x.json(); }).then(function (d) {
+          if (!d || !d.hay) return falla();
+          var boton = $('b');
+          boton.addEventListener('click', function () {
+            var s = atob(d.datos), a = new Uint8Array(s.length);
+            for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i);
+            var u = URL.createObjectURL(new Blob([a], {type: 'application/pdf'})), l = document.createElement('a');
+            l.href = u; l.download = d.nombre; document.body.appendChild(l); l.click(); l.remove();
+          });
+          $('carga').hidden = true; $('si').hidden = false;
+          boton.textContent = 'Descargar mi revisión (PDF)'; boton.disabled = false;
+        }).catch(falla);
+    })();
+  </script>
+</main>
+</body>
+</html>
